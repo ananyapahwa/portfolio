@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ananya Pahwa — Portfolio Design Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================
+     DESIGN TOKENS — read this block before building
+     ============================================
+     Palette
+       --paper   #F2F1E6  soft celery-ivory (not standard cream — greener, quieter)
+       --ink     #212C1F  deep forest-ink, near-black with a green cast
+       --moss    #4C6B4A  grounded sage — spiritual / calm / "growth"
+       --citrus  #DD8A3B  warm mandarin — ambition / appetite / fruit
+       --berry   #9C4A5C  dusty berry — the painter in her
+       --mist    #DEE3D2  pale sage for hairlines, card fills, dividers
+       --cream2  #FBF9F2  lifted paper, for cards sitting on --paper
+
+     Type
+       Display : "Fraunces"      — elegant, humanist serif with soft, organic curves
+       Body    : "Inter"         — clean, quiet, gets out of the way
+       Utility : "IBM Plex Mono" — stats, dates, tags — the engineer's register
+       Script  : "Caveat"        — handwritten asides, used sparingly, like margin notes
+
+     Layout
+       Editorial, asymmetric, generous whitespace. A recurring "duality" motif —
+       build / see, logic / instinct — laid out as two columns wherever her two
+       sides need to sit side by side without one outranking the other.
+
+     Signature element
+       A single hand-drawn vine that grows down the left margin of the Experience
+       section as you scroll — small leaf-nodes mark each role, like rings on a
+       tree. Botanical, unhurried, a little bit alive. Nothing else on the page
+       animates this much; the vine is the one place boldness is spent.
+     ============================================ */
+
+  :root{
+    --paper:#F2F1E6;
+    --cream2:#FBF9F2;
+    --ink:#212C1F;
+    --moss:#4C6B4A;
+    --moss-deep:#33492F;
+    --citrus:#DD8A3B;
+    --berry:#9C4A5C;
+    --mist:#DEE3D2;
+    --line: rgba(33,44,31,0.14);
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* subtle paper grain */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{ max-width: var(--maxw); margin:0 auto; padding:0 48px; }
+
+  h1,h2,h3,h4{ font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em; color:var(--ink); }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:lowercase;
+    color: var(--moss);
+  }
+
+  .script{
+    font-family:'Caveat', cursive;
+    color: var(--berry);
+  }
+
+  a{ color: inherit; }
+
+  ::selection{ background: var(--citrus); color: var(--cream2); }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--moss);
+    outline-offset: 3px;
+  }
+
+  /* ---------------- NAV ---------------- */
+  nav{
+    position:sticky; top:0; z-index:100;
+    background: rgba(242,241,230,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:500;
+  }
+  .nav-mark span{ color:var(--moss); font-style:italic; }
+  .nav-links{ display:flex; gap:34px; list-style:none; }
+  .nav-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-transform:lowercase;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    position:relative;
+    padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--citrus); transition:width .25s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  /* ---------------- HERO ---------------- */
+  header.hero{
+    padding: 84px 0 60px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.25fr 0.85fr;
+    gap: 64px;
+    align-items:center;
+  }
+  .hero-note{
+    font-family:'Caveat', cursive;
+    font-size: 26px;
+    color: var(--berry);
+    display:inline-block;
+    transform: rotate(-2deg);
+    margin-bottom: 10px;
+  }
+  .hero-name{
+    font-size: clamp(52px, 7vw, 92px);
+    line-height: 0.98;
+    font-weight:500;
+  }
+  .hero-name em{
+    font-style:italic;
+    color: var(--moss-deep);
+  }
+  .hero-role{
+    margin-top:22px;
+    font-size:18px;
+    max-width: 480px;
+    color: rgba(33,44,31,0.82);
+  }
+  .hero-tags{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:28px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.05em;
+    padding:7px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background: var(--cream2);
+  }
+  .hero-cta{
+    margin-top: 34px;
+    display:flex; gap:16px; align-items:center;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:2px;
+    display:inline-block;
+  }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-ghost{ border:1px solid var(--ink); color:var(--ink); }
+
+  .hero-portrait{
+    position:relative;
+  }
+  .portrait-frame{
+    position:relative;
+    border-radius: 4px;
+    overflow:hidden;
+    aspect-ratio: 4/5;
+    background: var(--mist);
+  }
+  .portrait-frame img{
+    width:100%; height:100%; object-fit:cover;
+    filter: saturate(0.92) contrast(1.02);
+  }
+  .portrait-frame::after{
+    content:"";
+    position:absolute; inset:0;
+    border: 1px solid rgba(33,44,31,0.18);
+    border-radius:4px;
+  }
+  .portrait-tab{
+    position:absolute; bottom:-18px; left:-18px;
+    background: var(--moss-deep);
+    color: var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.05em;
+    padding:10px 16px;
+    max-width:210px;
+    line-height:1.5;
+  }
+
+  /* section rhythm */
+  section{ padding: 96px 0; border-top:1px solid var(--line); }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:52px; flex-wrap:wrap; }
+  .section-title{ font-size: clamp(30px, 3.6vw, 42px); }
+  .section-kicker{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; color:var(--moss); text-transform:lowercase; margin-bottom:10px; display:block;}
+
+  /* ---------------- DUALITY (about) ---------------- */
+  .duality{
+    display:grid; grid-template-columns: 1fr 1fr; gap:0;
+    border:1px solid var(--line);
+  }
+  .duality > div{ padding:44px; }
+  .duality > div:first-child{ border-right:1px solid var(--line); background:var(--cream2); }
+  .duality h3{ font-size:24px; margin-bottom:16px; }
+  .duality h3.build{ color: var(--moss-deep); }
+  .duality h3.see{ color: var(--berry); }
+  .duality p{ font-size:15.5px; color:rgba(33,44,31,0.82); margin-bottom:14px; }
+  .duality .fine{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--moss); margin-top:20px; }
+
+  .about-lede{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height:1.5;
+    color: var(--ink);
+    max-width:820px;
+    margin-bottom:48px;
+  }
+  .about-lede .script{ font-style:normal; }
+
+  /* ---------------- EXPERIENCE / VINE ---------------- */
+  .timeline{ position:relative; padding-left:56px; }
+  .vine-svg{ position:absolute; left:0; top:6px; bottom:0; width:40px; height:100%; }
+  .vine-path{
+    stroke: var(--moss);
+    stroke-width:2;
+    fill:none;
+    stroke-linecap:round;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    transition: stroke-dashoffset 1s ease;
+  }
+  .timeline.in-view .vine-path{ stroke-dashoffset: 0; }
+
+  .role{ position:relative; padding-bottom:56px; }
+  .role:last-child{ padding-bottom:0; }
+  .role-leaf{
+    position:absolute; left:-56px; top:2px; width:14px; height:14px;
+    background: var(--citrus); border-radius: 0 60% 60% 60%;
+    border:2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--moss);
+  }
+  .role-date{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--moss); letter-spacing:0.04em; margin-bottom:6px; display:block; }
+  .role-title{ font-size:23px; margin-bottom:2px; }
+  .role-org{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--berry); margin-bottom:14px; display:block; }
+  .role ul{ list-style:none; max-width:680px; }
+  .role li{ font-size:15px; color:rgba(33,44,31,0.82); padding-left:18px; position:relative; margin-bottom:9px; }
+  .role li::before{ content:"—"; position:absolute; left:0; color:var(--citrus); }
+
+  /* ---------------- PROJECTS ---------------- */
+  .projects-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:26px; }
+  .project-card{
+    background: var(--cream2);
+    border:1px solid var(--line);
+    padding:32px 28px;
+    border-radius:3px;
+    display:flex; flex-direction:column;
+    min-height: 340px;
+  }
+  .project-num{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--moss); margin-bottom:20px; }
+  .project-card h3{ font-size:22px; margin-bottom:10px; }
+  .project-stack{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--berry); margin-bottom:16px; line-height:1.7; }
+  .project-card p{ font-size:14.5px; color:rgba(33,44,31,0.8); flex-grow:1; }
+  .project-links{ margin-top:20px; display:flex; gap:16px; }
+  .project-links a{ font-family:'IBM Plex Mono', monospace; font-size:12px; text-decoration:underline; text-underline-offset:3px; }
+
+  /* ---------------- SKILLS / PRACTICE ---------------- */
+  .practice-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:26px; }
+  .practice-card{ border:1px solid var(--line); padding:36px; background:var(--paper); }
+  .practice-card h4{ font-size:19px; margin-bottom:18px; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:9px; }
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    padding:8px 13px; border:1px solid var(--line); background:var(--cream2);
+  }
+  .chip.soft{ border-color: var(--berry); color: var(--berry); background: transparent; }
+
+
+  /* ---------------- PHILOSOPHY ---------------- */
+  .philosophy{
+    text-align:center; padding:110px 0;
+  }
+  .philosophy blockquote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size: clamp(26px, 4vw, 44px);
+    max-width:780px;
+    margin:0 auto;
+    line-height:1.45;
+    color:var(--moss-deep);
+  }
+  .philosophy .script{ display:block; margin-top:24px; font-size:22px; color:var(--berry); }
+
+  /* ---------------- CONTACT ---------------- */
+  footer{ padding:80px 0 60px; }
+  .contact-grid{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:40px; }
+  .contact-big{ font-size: clamp(34px,5vw,58px); max-width:600px; }
+  .contact-list{ display:flex; flex-direction:column; gap:10px; }
+  .contact-list a{ font-family:'IBM Plex Mono', monospace; font-size:14px; text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .foot-note{ margin-top:70px; display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--moss); border-top:1px solid var(--line); padding-top:20px; }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:none; }
+
+  @media (max-width: 880px){
+    .wrap{ padding:0 22px; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-portrait{ order:-1; max-width:280px; }
+    .duality{ grid-template-columns:1fr; }
+    .duality > div:first-child{ border-right:none; border-bottom:1px solid var(--line); }
+    .projects-grid{ grid-template-columns:1fr; }
+    .practice-grid{ grid-template-columns:1fr; }
+    .contact-grid{ flex-direction:column; align-items:flex-start; }
+    .nav-links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">ananya <span>pahwa</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#practice">the practice</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-note">hi — come on in.</span>
+      <h1 class="hero-name">Ananya<br><em>Pahwa</em></h1>
+      <p class="hero-role">Computer engineer with a painter's eye. I build backend systems that hold up under load, and I spend the rest of my hours reading, painting, and paying attention — to people, to plates, to whatever's growing.</p>
+      <div class="hero-tags">
+        <span class="tag">backend engineering</span>
+        <span class="tag">systems design</span>
+        <span class="tag">applied ML</span>
+        <span class="tag">painting</span>
+        <span class="tag">quietly spiritual</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-solid">see the work</a>
+        <a href="#contact" class="btn btn-ghost">say hello</a>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <div class="portrait-frame">
+        <img src="ananya-portrait.png" alt="Portrait of Ananya Pahwa" />
+      </div>
+      <div class="portrait-tab">Patiala, India — BTech Computer Engineering, Thapar Institute, class of 2027</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <span class="eyebrow">01 — who's asking</span>
+    <p class="about-lede reveal">I like systems that don't break under pressure, and I like <span class="script">people</span> for roughly the same reason — I've always been good at reading a room before I read the requirements doc. Most days I'm somewhere between a terminal and a sketchbook.</p>
+
+    <div class="duality reveal">
+      <div>
+        <h3 class="build">how I build</h3>
+        <p>I'm a BTech Computer Engineering student at Thapar Institute of Engineering and Technology, currently holding a 9.57 GPA. I've spent the last two years in backend-heavy internships — designing APIs, wrangling databases, and forecasting things that don't want to be forecast.</p>
+        <p>I care more about a system that behaves correctly at 2am than one that looks clever in a demo. Load testing, fault tolerance, and clean data models are where I get genuinely excited.</p>
+        <span class="fine">C++ · TypeScript · Python · PostgreSQL · Redis · FastAPI</span>
+      </div>
+      <div>
+        <h3 class="see">how I see</h3>
+        <p>Outside of the codebase, I paint — mostly for no one, which is the point. I read constantly, I'm careful about what I put in my body, and I show up at the gym because a steady body makes for a steady mind.</p>
+        <p>I'd call myself spiritual before religious — more interested in staying grounded than in ritual. People tend to tell me I'm easy to be around. I'll take it.</p>
+        <span class="fine">painting · reading · strength training · mindful eating · noticing things</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">02 — the record</span>
+        <h2 class="section-title">Where I've been building.</h2>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <svg class="vine-svg" viewBox="0 0 40 900" preserveAspectRatio="none">
+        <path class="vine-path" d="M20,0 C10,120 30,220 18,340 C8,440 32,540 20,660 C12,760 28,820 20,900" />
+      </svg>
+
+      <div class="role">
+        <span class="role-leaf"></span>
+        <span class="role-date">Jul 2025 — Jun 2026</span>
+        <h3 class="role-title">Research Intern</h3>
+        <span class="role-org">Centre of Excellence in Data Science &amp; AI, TIET</span>
+        <ul>
+          <li>Built a mathematical model forecasting energy usage across two hostels, weighing 10+ variables including occupancy, temperature, and seasonality.</li>
+          <li>Analyzed 250+ MWh of smart-meter data, reaching 92.8% prediction accuracy against real meter readings.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <span class="role-leaf"></span>
+        <span class="role-date">May 2025 — May 2026</span>
+        <h3 class="role-title">Software Developer Intern</h3>
+        <span class="role-org">Glyptika Studios Venture Labs, TIET</span>
+        <ul>
+          <li>Led an inventory management build for the Indian Army's 507 Workshop, automating manual data entry and resource tracking.</li>
+          <li>Migrated 15,000+ legacy DBF/CSV files into a normalized PostgreSQL database, closing out years of data inconsistency.</li>
+          <li>Designed and shipped 20+ production FastAPI endpoints handling 500+ daily resource requests.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <span class="role-leaf"></span>
+        <span class="role-date">Oct 2024 — May 2025</span>
+        <h3 class="role-title">Backend Intern</h3>
+        <span class="role-org">Medlr — Remote</span>
+        <ul>
+          <li>Built core REST APIs for pharmacy claiming and secure authentication, onboarding 20+ pharmacies and 10,000+ medicines.</li>
+          <li>Engineered a large-file upload pipeline with Multer and GridFS, cutting payload failures by 95%.</li>
+          <li>Implemented a greedy Set Cover algorithm for fast multi-medicine search, minimizing pharmacy count and delivery cost.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">03 — selected work</span>
+        <h2 class="section-title">Three things I'd walk you through.</h2>
+      </div>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <span class="project-num">relay</span>
+        <h3>Webhook Delivery Service</h3>
+        <div class="project-stack">Node.js · TypeScript · React · PostgreSQL · Redis</div>
+        <p>A distributed webhook system that decouples ingestion from delivery via Redis Streams — sub-200ms p95 latency and a &gt;99% success rate under load, with a fault-tolerant worker pool and zero message loss verified by a chaos test suite.</p>
+        <div class="project-links"><a href="#">github</a><a href="#">video</a></div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-num">synapse</span>
+        <h3>Adaptive Learning Engine</h3>
+        <div class="project-stack">Redis · PostgreSQL · ChromaDB · Ollama</div>
+        <p>A RAG pipeline over Llama 3.1 with concept-scoped chunking, modeling student knowledge-state with Item Response Theory and Bayesian Knowledge Tracing to trigger interventions when mastery drops below 85%. Built to hold 1,000+ concurrent users.</p>
+        <div class="project-links"><a href="#">github</a></div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-num">physiocare</span>
+        <h3>PhysioCare Portal</h3>
+        <div class="project-stack">Python · PyTorch · Mediapipe · Flask</div>
+        <p>An LSTM model for human activity classification from smart-insole data, paired with real-time Mediapipe skeletal tracking so doctors can monitor patient recovery remotely. Second Runner-Up at the Israel–India Hackathon.</p>
+        <div class="project-links"><a href="#">github</a><a href="#">video</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">04 — the toolkit &amp; the practice</span>
+        <h2 class="section-title">What I reach for, on either side of the screen.</h2>
+      </div>
+    </div>
+
+    <div class="practice-grid">
+      <div class="practice-card reveal">
+        <h4>the toolkit</h4>
+        <div class="chip-row">
+          <span class="chip">C / C++</span>
+          <span class="chip">JavaScript / TypeScript</span>
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Node.js / Express</span>
+          <span class="chip">React / Next.js</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">PostgreSQL / MongoDB / Redis</span>
+          <span class="chip">Docker</span>
+          <span class="chip">System Design</span>
+        </div>
+      </div>
+      <div class="practice-card reveal">
+        <h4>the practice</h4>
+        <div class="chip-row">
+          <span class="chip soft">painting</span>
+          <span class="chip soft">reading — fiction &amp; otherwise</span>
+          <span class="chip soft">strength training</span>
+          <span class="chip soft">mindful eating</span>
+          <span class="chip soft">stillness / spirituality</span>
+          <span class="chip soft">reading people</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="philosophy">
+  <div class="wrap">
+    <blockquote class="reveal">"A well-designed system and a well-lived day follow the same rule — nothing works if you're not paying attention."</blockquote>
+    <span class="script">— a note to self, kept on the wall above my desk</span>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <h2 class="contact-big">Building something interesting? I'd like to hear about it.</h2>
+      <div class="contact-list">
+        <a href="mailto:ananyapahwa.jobs@gmail.com">ananyapahwa.jobs@gmail.com</a>
+        <a href="https://linkedin.com/in/ananya-pahwa" target="_blank" rel="noopener">linkedin.com/in/ananya-pahwa</a>
+        <a href="https://github.com/ananyapahwa" target="_blank" rel="noopener">github.com/ananyapahwa</a>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>ananya pahwa — patiala, india</span>
+      <span>built with attention to detail</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal-on-scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-visible'); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // vine draw-on-scroll for the timeline
+  const timeline = document.querySelector('.timeline');
+  const vineIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ timeline.classList.add('in-view'); } });
+  }, { threshold: 0.1 });
+  if(timeline) vineIO.observe(timeline);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-paper: #f2f1e6;
+  --color-cream2: #fbf9f2;
+  --color-ink: #212c1f;
+  --color-moss: #4c6b4a;
+  --color-moss-deep: #33492f;
+  --color-citrus: #dd8a3b;
+  --color-berry: #9c4a5c;
+  --color-mist: #dee3d2;
+  --color-line: rgb(33 44 31 / 0.14);
+
+  --color-background: #f2f1e6;
+  --color-foreground: #212c1f;
+  --color-card: #fbf9f2;
+  --color-card-foreground: #212c1f;
+  --color-primary: #212c1f;
+  --color-primary-foreground: #f2f1e6;
+  --color-secondary: #dee3d2;
+  --color-secondary-foreground: #212c1f;
+  --color-muted: #dee3d2;
+  --color-muted-foreground: #4c6b4a;
+  --color-accent: #4c6b4a;
+  --color-accent-foreground: #f2f1e6;
+  --color-border: rgb(33 44 31 / 0.14);
+  --color-input: rgb(33 44 31 / 0.14);
+  --color-ring: #4c6b4a;
+  --color-destructive: #9c4a5c;
+  --color-destructive-foreground: #fbf9f2;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-script: "Caveat", cursive;
+
+  --breakpoint-desk: 881px;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans font-normal antialiased overflow-x-hidden;
+    line-height: 1.6;
+  }
+
+  /* Subtle paper grain from the design reference */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-medium text-ink tracking-[-0.01em];
+  }
+
+  ::selection {
+    background: var(--color-citrus);
+    color: var(--color-cream2);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  [data-slot="sheet-close"]:focus-visible {
+    outline: 2px solid var(--color-moss);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@utility wrap {
+  margin-inline: auto;
+  max-width: 1180px;
+  padding-inline: 22px;
+
+  @media (min-width: 881px) {
+    padding-inline: 48px;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: var(--color-moss);
+}
+
+@utility section-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--color-moss);
+  text-transform: lowercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+@utility skip-link {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 200;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  padding: 10px 16px;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.leaf-sway {
+  transform-origin: 30% 30%;
+  animation: leaf-sway 4.6s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf-sway {
+    animation: none;
+  }
+}
+
+@keyframes leaf-sway {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
