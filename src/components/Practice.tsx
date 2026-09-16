@@ -1,45 +1,38 @@
 import { Reveal } from "@/components/Reveal"
 import { Card } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
 
-const TOOLKIT = [
-  "C / C++",
-  "JavaScript / TypeScript",
-  "Python",
-  "SQL",
-  "Node.js / Express",
-  "React / Next.js",
-  "FastAPI",
-  "PostgreSQL / MongoDB / Redis",
-  "Docker",
-  "System Design",
+const SKILLS = [
+  {
+    category: "languages",
+    items: ["C / C++", "JavaScript / TypeScript", "Python", "SQL", "HTML / CSS"],
+  },
+  {
+    category: "frameworks & libraries",
+    items: ["Node.js / Express.js", "React.js / Next.js", "FastAPI"],
+  },
+  {
+    category: "tools & databases",
+    items: ["PostgreSQL", "MongoDB", "Redis", "Docker", "Git / GitHub", "Oracle DB"],
+  },
+  {
+    category: "concepts & coursework",
+    items: [
+      "Data Structures & Algorithms",
+      "System Design",
+      "Operating Systems",
+      "Computer Networks",
+      "Database Management Systems",
+      "Object-Oriented Programming",
+      "Deep Learning",
+      "Software Engineering",
+      "REST APIs",
+    ],
+  },
 ] as const
 
-const PRACTICE = [
-  "painting",
-  "reading — fiction & otherwise",
-  "strength training",
-  "mindful eating",
-  "stillness / spirituality",
-  "reading people",
-] as const
-
-function Chip({
-  children,
-  soft,
-}: {
-  children: string
-  soft?: boolean
-}) {
+function Chip({ children }: { children: string }) {
   return (
-    <span
-      className={cn(
-        "border px-[13px] py-2 font-mono text-xs",
-        soft
-          ? "border-berry bg-transparent text-berry"
-          : "border-line bg-cream2 text-ink",
-      )}
-    >
+    <span className="border border-line bg-cream2 px-[13px] py-2 font-mono text-xs text-ink">
       {children}
     </span>
   )
@@ -51,40 +44,28 @@ export function Practice() {
       <div className="wrap">
         <div className="mb-[52px] flex flex-wrap items-end justify-between gap-6">
           <div>
-            <span className="section-kicker">04 — the toolkit & the practice</span>
+            <span className="section-kicker">04 — the toolkit</span>
             <h2 className="text-[clamp(30px,3.6vw,42px)]">
-              What I reach for, on either side of the screen.
+              What I reach for when building.
             </h2>
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-[26px] desk:grid-cols-2">
-          <Reveal>
-            <Card className="rounded-none border-line bg-paper p-9">
-              <h4 className="mb-[18px] font-display text-[19px] font-medium">
-                the toolkit
-              </h4>
-              <div className="flex flex-wrap gap-[9px]">
-                {TOOLKIT.map((item) => (
-                  <Chip key={item}>{item}</Chip>
-                ))}
-              </div>
-            </Card>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <Card className="rounded-none border-line bg-paper p-9">
-              <h4 className="mb-[18px] font-display text-[19px] font-medium">
-                the practice
-              </h4>
-              <div className="flex flex-wrap gap-[9px]">
-                {PRACTICE.map((item) => (
-                  <Chip key={item} soft>
-                    {item}
-                  </Chip>
-                ))}
-              </div>
-            </Card>
-          </Reveal>
+          {SKILLS.map((skillGroup, i) => (
+            <Reveal key={skillGroup.category} delay={i * 0.08}>
+              <Card className="h-full rounded-none border-line bg-paper p-9">
+                <h4 className="mb-[18px] font-display text-[19px] font-medium text-moss-deep">
+                  {skillGroup.category}
+                </h4>
+                <div className="flex flex-wrap gap-[9px]">
+                  {skillGroup.items.map((item) => (
+                    <Chip key={item}>{item}</Chip>
+                  ))}
+                </div>
+              </Card>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

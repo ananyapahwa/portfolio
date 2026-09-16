@@ -88,7 +88,7 @@ export function Projects() {
                       <CardFooter>
                         {project.links.map((link) => (
                           <Button key={link.label} variant="link" asChild>
-                            <a href={link.href}>{link.label}</a>
+                            <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
                           </Button>
                         ))}
                       </CardFooter>
