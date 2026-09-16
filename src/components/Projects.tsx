@@ -21,8 +21,8 @@ const PROJECTS = [
     stack: "Node.js · TypeScript · React · PostgreSQL · Redis",
     body: "A distributed webhook system that decouples ingestion from delivery via Redis Streams — sub-200ms p95 latency and a >99% success rate under load, with a fault-tolerant worker pool and zero message loss verified by a chaos test suite.",
     links: [
-      { label: "github", href: "#" },
-      { label: "video", href: "#" },
+      { label: "github", href: "https://github.com/ananyapahwa/relay" },
+      { label: "video", href: "https://drive.google.com/file/d/1qnLkD57kzp64H_avetOmZpSzvl9-u5ld/view?usp=sharing" },
     ],
   },
   {
@@ -30,7 +30,10 @@ const PROJECTS = [
     title: "Adaptive Learning Engine",
     stack: "Redis · PostgreSQL · ChromaDB · Ollama",
     body: "A RAG pipeline over Llama 3.1 with concept-scoped chunking, modeling student knowledge-state with Item Response Theory and Bayesian Knowledge Tracing to trigger interventions when mastery drops below 85%. Built to hold 1,000+ concurrent users.",
-    links: [{ label: "github", href: "#" }],
+    links: [
+      { label: "github", href: "https://github.com/ananyapahwa/quiz-portal" },
+      { label: "live demo", href: "https://quiz-portal-green.vercel.app/login" },
+    ],
   },
   {
     num: "physiocare",
@@ -38,8 +41,8 @@ const PROJECTS = [
     stack: "Python · PyTorch · Mediapipe · Flask",
     body: "An LSTM model for human activity classification from smart-insole data, paired with real-time Mediapipe skeletal tracking so doctors can monitor patient recovery remotely. Second Runner-Up at the Israel–India Hackathon.",
     links: [
-      { label: "github", href: "#" },
-      { label: "video", href: "#" },
+      { label: "github", href: "https://github.com/Shalom-Swasth-Solution" },
+      { label: "video", href: "https://youtu.be/qIL_3G8OD04" },
     ],
   },
 ] as const
