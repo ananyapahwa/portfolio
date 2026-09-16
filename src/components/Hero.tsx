@@ -39,30 +39,10 @@ export function Hero() {
           </h1>
           <BlurFade delay={0.45} duration={0.6} blur="4px">
             <p className="mt-[22px] max-w-[480px] text-[18px] text-ink/82">
-              Computer engineer with a painter's eye. I build backend systems
-              that hold up under load, and I spend the rest of my hours reading,
-              painting, and paying attention — to people, to plates, to
-              whatever's growing.
+              Computer engineer who likes understanding what happens beneath the interface. I build backend systems, design APIs and data models, and think about how software behaves under scale. My work sits at the intersection of problem-solving, system design, and building things that are reliable by design.
             </p>
           </BlurFade>
-          <BlurFade delay={0.55} duration={0.55} blur="3px">
-            <div className="mt-7 flex flex-wrap gap-2.5">
-              {[
-                "backend engineering",
-                "systems design",
-                "applied ML",
-                "painting",
-                "quietly spiritual",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-line bg-cream2 px-3 py-[7px] font-mono text-[11.5px] tracking-[0.05em]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </BlurFade>
+
           <BlurFade delay={0.65} duration={0.5} blur="2px">
             <div className="mt-[34px] flex items-center gap-4">
               <Button variant="solid" asChild>
